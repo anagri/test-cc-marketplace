@@ -26,6 +26,7 @@ Testing if ${CLAUDE_PROJECT_DIR} and ${CLAUDE_PLUGIN_ROOT} expand at prompt-time
 
 CLAUDE_PROJECT_DIR (from prompt expansion): ${CLAUDE_PROJECT_DIR}
 CLAUDE_PLUGIN_ROOT (from prompt expansion): ${CLAUDE_PLUGIN_ROOT}
+PWD (from prompt expansion): ${PWD}
 
 Expected behavior:
 - If these show actual paths, prompt-time expansion works in plugin commands
