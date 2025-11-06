@@ -11,8 +11,8 @@
         "matcher": "Write|Edit",
         "hooks": [
           {
-            "type": "prompt",
-            "prompt": "using Bash Tool invoke script:\n\nCLAUDE_PROJECT_DIR=${CLAUDE_PROJECT_DIR} ${CLAUDE_PLUGIN_ROOT}/scripts/format-code.sh $ARGUMENTS"
+            "type": "command",
+            "command": "mkdir -p \"$CLAUDE_PROJECT_DIR\"/agent-logs && echo 'triggered' >> \"$CLAUDE_PROJECT_DIR\"/agent-logs/plugin-hook-events.log"
           }
         ]
       }
