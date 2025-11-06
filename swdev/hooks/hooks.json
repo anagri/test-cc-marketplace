@@ -1,0 +1,12 @@
+{
+  "hooks": [
+    {
+      "name": "auto-format-code",
+      "description": "Automatically format TypeScript/TSX files after edits",
+      "event": "PostToolUse",
+      "toolMatcher": "Write|Edit",
+      "type": "prompt",
+      "prompt": "You just used {{TOOL_NAME}} tool on file: {{TOOL_INPUT_file_path}}\n\nTask: Invoke formatting script and log event.\n\n1. **Always log hook invocation** to ${CLAUDE_PROJECT_DIR}/agent-logs/plugin-hook-events.log:\n   - Timestamp\n   - Event: PostToolUse:{{TOOL_NAME}}\n   - File: {{TOOL_INPUT_file_path}}\n   - Decision: format/skip\n\n2. **Invoke script via Bash tool:**\n   Use: CLAUDE_PROJECT_DIR=${CLAUDE_PROJECT_DIR} ${CLAUDE_PLUGIN_ROOT}/scripts/format-code.sh \"{{TOOL_INPUT_file_path}}\"\n\n3. **Report action taken** (format or skip with reason)\n\nNote: Script handles file extension check (.ts, .tsx) and returns skip if not applicable."
+    }
+  ]
+}
