@@ -1,21 +1,29 @@
 #!/usr/bin/env bash
 # Auto-format TypeScript/TSX files with npm run format
+# Processes hook input JSON passed via $ARGUMENTS
 
 set -e
 
-FILE_PATH="$1"
+# Read entire JSON input from arguments
+HOOK_INPUT="$*"
 LOG_FILE="${CLAUDE_PROJECT_DIR}/agent-logs/plugin-hook-events.log"
 
 # Ensure log directory exists
 mkdir -p "$(dirname "$LOG_FILE")"
 
-# Log script invocation
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Script invoked: format-code.sh \"$FILE_PATH\"" >> "$LOG_FILE"
+# Log raw hook input
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] Hook triggered" >> "$LOG_FILE"
+echo "Input: $HOOK_INPUT" >> "$LOG_FILE"
+
+# Extract file_path from JSON using jq
+FILE_PATH=$(echo "$HOOK_INPUT" | jq -r '.tool_input.file_path // empty' 2>/dev/null)
 
 if [[ -z "$FILE_PATH" ]]; then
-  echo "action: skip (no file path provided)" | tee -a "$LOG_FILE"
+  echo "action: skip (no file_path in tool_input)" | tee -a "$LOG_FILE"
   exit 0
 fi
+
+echo "Extracted file_path: $FILE_PATH" >> "$LOG_FILE"
 
 if [[ ! -f "$FILE_PATH" ]]; then
   echo "action: skip (file not found: $FILE_PATH)" | tee -a "$LOG_FILE"
