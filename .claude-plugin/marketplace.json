@@ -1,0 +1,22 @@
+{
+  "name": "test-cc-marketplace",
+  "owner": {
+    "name": "Tutorial User"
+  },
+  "metadata": {
+    "description": "GitHub marketplace for testing public distribution",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "swdev",
+      "source": "./swdev",
+      "description": "Software development plugin distributed via GitHub marketplace",
+      "version": "1.0.0",
+      "author": {
+        "name": "Tutorial User"
+      },
+      "category": "development"
+    }
+  ]
+}
